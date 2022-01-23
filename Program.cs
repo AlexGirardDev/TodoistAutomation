@@ -19,6 +19,8 @@ internal static class Program
         var  syncRate = TimeSpan.FromMinutes(int.Parse(Environment.GetEnvironmentVariable("SyncRate") ?? "30"));
         
         var client = new TodoistClient(apiKey);
+        Console.WriteLine("Connected");
+        
 
         var refreshTaskCache = TimeSpan.FromMinutes(15);
         var taskCacheAge = DateTime.Now;
@@ -28,6 +30,7 @@ internal static class Program
         var recurringTasks = (await client.Items.GetAsync())?
             .Where(x => x.DueDate is {IsRecurring: { }} && x.DueDate.IsRecurring.Value)
             .ToDictionary(x => x.Id);
+        Console.WriteLine($"Loaded recurring tasks{recurringTasks?.Count}");
         while (true)
         {
             try
