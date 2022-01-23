@@ -16,7 +16,7 @@ internal static class Program
     {
         var apiKey = Environment.GetEnvironmentVariable("ApiKey");
         var  endOfDayOffset = TimeSpan.FromMinutes(int.Parse(Environment.GetEnvironmentVariable("EodOffset") ?? "240"));
-        var  syncRate = TimeSpan.FromMinutes(int.Parse(Environment.GetEnvironmentVariable("SyncRate") ?? "30"));
+        var  syncRate = int.Parse(Environment.GetEnvironmentVariable("SyncRate") ?? "30");
         
         var client = new TodoistClient(apiKey);
         Console.WriteLine("Connected");
