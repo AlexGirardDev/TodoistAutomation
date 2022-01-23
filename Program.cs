@@ -31,6 +31,8 @@ internal static class Program
             .Where(x => x.DueDate is {IsRecurring: { }} && x.DueDate.IsRecurring.Value)
             .ToDictionary(x => x.Id);
         Console.WriteLine($"Loaded recurring tasks{recurringTasks?.Count}");
+        Console.WriteLine(DateTime.UtcNow);
+         
         while (true)
         {
             try
